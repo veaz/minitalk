@@ -20,6 +20,11 @@
 # include <time.h> //nanosleep
 # include "ft_printf/ft_printf.h"  //TEST
 
+struct s_st{
+	char	str[8];
+	int		bit;
+} s_st;
+
 int		ft_strlen(char *s);
 
 int		ft_atoi(char *str);

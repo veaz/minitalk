@@ -37,25 +37,22 @@ int	ft_decimal(char *bin)
 
 void	ft_sigusr(int numsig)
 {
-	static char	str[8];
-	static int	x = 0;
-
 	if (numsig == SIGUSR1)
 	{
-		str[x] = '1';
+		s_st.str[s_st.bit] = '1';
 	}
 	else
 	{	
-		str[x] = '0';
+		s_st.str[s_st.bit] = '0';
 	}
-	if (x == 7)
+	if (s_st.bit == 7)
 	{
-		str[x + 1] = '\0';
-		ft_decimal(str);
-		x = 0;
+		s_st.str[s_st.bit + 1] = '\0';
+		ft_decimal(s_st.str);
+		s_st.bit = 0;
 	}
 	else
-		x++;
+		s_st.bit++;
 }
 
 int	main(void)
