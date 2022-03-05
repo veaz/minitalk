@@ -8,15 +8,21 @@ CC = gcc
 all: client server
 
 client:
-	$(CC) client.c $(SRCS) -o client
+	${MAKE} -C ./ft_printf all
+	cp ./ft_printf/libftprintf.a client
+	$(CC) client.c -L. -lftprintf $(SRCS) -o client
 
 server:
-	$(CC) server.c $(SRCS) -o server
+	${MAKE} -C ./ft_printf all
+	cp ./ft_printf/libftprintf.a server
+	$(CC) server.c -L. -lftprintf $(SRCS) -o server
 
 clean:
+	${MAKE} -C ./ft_printf clean
 	$(RM) $(OBJS) client.o server.o
 
 fclean: clean
+	${MAKE} -C ./ft_printf fclean
 	$(RM) client server
 
 re: fclean all

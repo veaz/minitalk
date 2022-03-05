@@ -18,13 +18,14 @@
 # include <signal.h>
 # include <stdlib.h> // Malloc
 # include <time.h> //nanosleep
+# include "ft_printf/ft_printf.h"  //TEST
 
-int	ft_strlen(char *s);
+int		ft_strlen(char *s);
 
-int	ft_atoi(char *str);
+int		ft_atoi(char *str);
 
 char	*ft_binary(int decimal);
 
-int	ft_send(char *bin, int pid);
+int		ft_send(char *bin, int pid);
 
 #endif
