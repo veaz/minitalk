@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 int	ft_decimal(char *bin)
 {
@@ -55,9 +55,10 @@ int	main(void)
 
 	process_id = getpid();
 	ft_printf("The process id (PID): %d\n", process_id);
-	signal (SIGUSR1, ft_sigusr);
-	signal (SIGUSR2, ft_sigusr);
+	signal(SIGUSR1, ft_sigusr);
+	signal(SIGUSR2, ft_sigusr);
 	while (1)
-		pause ();
+		sigaction(SIGUSR1);
+		//pause ();
 	return (0);
 }
