@@ -14,7 +14,7 @@ server:
 	$(CC) server.c $(SRCS) -o server
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) client.o server.o
 
 fclean: clean
 	$(RM) client server

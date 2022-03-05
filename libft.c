@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	int	a;
 
@@ -22,7 +22,7 @@ int	ft_strlen(const char *s)
 	return (a);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int	x;
 	int	sig;

@@ -23,13 +23,13 @@ int	ft_send(char *bin, int pid)
 		if (bin[x] == '1')
 		{
 			kill (pid, SIGUSR1);
-			usleep (1);
+			usleep (300);
 			//printf("KILL 1\n");
 		}
 		else if (bin[x] == '0' )
 		{
 			kill (pid, SIGUSR2);
-			usleep (1);
+			usleep (300);
 			//printf("KILL 0\n");
 		}
 		x++;
@@ -69,10 +69,10 @@ char	*ft_binary(int decimal)
 	//printf("VALOR DE X == %i\n", x);
 	bin[x] = '\0';
 	//printf("PID ANTES DE ENVIAR == %i\n", pid);
-	printf("BIN LAST == %s, len == %i\n", bin, ft_strlen(bin));
+	//printf("BIN LAST == %s, len == %i\n", bin, ft_strlen(bin));
 
 	//ft_send(bin, pid);
-	printf("retornando binary\n");
+	//printf("retornando binary\n");
 	return (bin);
 }
 
@@ -107,6 +107,8 @@ int main(int argc, char **argv)
 	{
 		//printf("Valor x en bluce == %i\n", x);
 		decimal = (int)*(word + x);
+		//decimal = ft_atoi(&word[x]);
+		//printf("decimal == %u\n", decimal);
 		temp = ft_binary(decimal);
 		ft_send(temp, pid);
 		//printf("valor de %c en decimal == %i\n", *(argv[2] + x), decimal );

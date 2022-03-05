@@ -19,9 +19,9 @@
 # include <stdlib.h> // Malloc
 # include <time.h> //nanosleep
 
-int	ft_strlen(const char *s);
+int	ft_strlen(char *s);
 
-int	ft_atoi(const char *str);
+int	ft_atoi(char *str);
 
 char	*ft_binary(int decimal);
 

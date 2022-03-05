@@ -12,14 +12,68 @@
 
 #include "minitalk.h"
 
-void	ft_sigusr1(int numsig)
+int	ft_decimal (char *bin)
 {
-	printf("Recibiendo senal SIGUSR1 == 1\n");
+	//char ret;
+	int decimal;
+	int x;
+	int total;
+
+	x = 0;
+	decimal = 128;
+	total = 0;
+
+	while (x < 8)
+	{
+		//printf("DECIMAL #%i == %d\n", x, total);
+		if (bin[x] == '1')
+		{
+			total = total + decimal;
+			//printf("encontre 1 en %i\n", x);
+		}
+		decimal = decimal / 2;
+		x++;
+	}
+	//printf("\nBIN == %s == %c\n", bin, total);
+	write(1, &total, 1);
+	total = 0;
+	//printf("c %c", (char)total);
+	//printf("Decimal v1 == %i\n", total);
+	return (0);
 }
 
-void	ft_sigusr2(int numsig)
+
+void	ft_sigusr(int numsig)
 {
-	printf("Recibiendo senal SIGUSR2 == 0\n");
+	static char str[8];
+	static int x = 0;
+
+	if (numsig == SIGUSR1)
+	{
+		//printf("1");
+		str[x] = '1';
+	}
+	else
+	{	
+		//printf("0");
+		str[x] = '0';
+	}
+	
+	if (x == 7)
+	{
+		//printf("Se gan recibido %i senales\n", x);
+		str[x + 1] = '\0'; 
+		//printf("STR == %s\n", str);
+		//printf("\nBIN == %s == ", str);
+		ft_decimal(str);
+		x = 0;
+	}
+	else
+	{
+		x++;
+		//printf("no entro a if\n");
+	}
+
 }
 
 int main(void)
@@ -35,16 +89,17 @@ int main(void)
 	printf("The process id (PID): %d\n",process_id);
 	//printf("The process id of parent function (PPID): %d\n",p_process_id);
 
-	signal (SIGUSR1, ft_sigusr1);
-	signal (SIGUSR2, ft_sigusr2);
+	signal (SIGUSR1, ft_sigusr);
+	signal (SIGUSR2, ft_sigusr);
 
 	while (1)
 	{
-		printf("Esperando senal\n");
+		//printf("Esperando senal\n");
 		pause ();
 		//if (signal (SIGUSR1, ft_sigusr1) || signal (SIGUSR2, ft_sigusr2))
 			sig++;
-		//printf("recibido\n");
+		//printf("r = ");
 	}
+	//printf("FIN\n");
 	return (0);
 }
