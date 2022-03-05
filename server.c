@@ -1,19 +1,25 @@
-/*#include <signal.h> //Senales
-#include <stdio.h> //Printf, delete pls sr*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/05 12:17:25 by vaguilar          #+#    #+#             */
+/*   Updated: 2022/03/05 12:17:27 by vaguilar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
+#include "minitalk.h"
 
 void	ft_sigusr1(int numsig)
 {
-	printf("Recibiendo senal SIGUSR1 == 0\n");
+	printf("Recibiendo senal SIGUSR1 == 1\n");
 }
 
 void	ft_sigusr2(int numsig)
 {
-	printf("Recibiendo senal SIGUSR2 == 1\n");
+	printf("Recibiendo senal SIGUSR2 == 0\n");
 }
 
 int main(void)
@@ -34,9 +40,11 @@ int main(void)
 
 	while (1)
 	{
-		printf("Esperando senal, se han recibido %i\n", sig);
+		printf("Esperando senal\n");
 		pause ();
-		printf("recibido\n");
+		//if (signal (SIGUSR1, ft_sigusr1) || signal (SIGUSR2, ft_sigusr2))
+			sig++;
+		//printf("recibido\n");
 	}
 	return (0);
 }

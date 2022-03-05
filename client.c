@@ -1,43 +1,16 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h> // Malloc
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/05 12:16:52 by vaguilar          #+#    #+#             */
+/*   Updated: 2022/03/05 12:16:54 by vaguilar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_strlen(const char *s)
-{
-	int	a;
-
-	a = 0;
-	while (s[a] != '\0')
-		a++;
-	return (a);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	x;
-	int	sig;
-	int	num;
-
-	x = 0;
-	sig = 1;
-	num = 0;
-	while (str[x] == ' ' || (str[x] >= '\t' && str[x] <= '\r'))
-		x++;
-	if (str[x] == '+' || str[x] == '-')
-	{
-		if (str[x] == '-')
-			sig = sig * -1;
-		x++;
-	}
-	while (str[x] >= '0' && str[x] <= '9')
-	{
-		num = (str[x] - '0') + (num * 10);
-		x++;
-	}
-	return (num * sig);
-}
+#include "minitalk.h"
 
 int	ft_send(char *bin, int pid)
 {
@@ -50,12 +23,14 @@ int	ft_send(char *bin, int pid)
 		if (bin[x] == '1')
 		{
 			kill (pid, SIGUSR1);
-			printf("KILL 1\n");
+			usleep (1);
+			//printf("KILL 1\n");
 		}
 		else if (bin[x] == '0' )
 		{
 			kill (pid, SIGUSR2);
-			printf("KILL 0\n");
+			usleep (1);
+			//printf("KILL 0\n");
 		}
 		x++;
 	}
@@ -127,18 +102,19 @@ int main(int argc, char **argv)
     //kill (ft_atoi(argv[1]), SIGUSR1);
 	//kill (ft_atoi(argv[1]), SIGUSR2);
 
-	printf("WORD == %s y len == %i\n", word, ft_strlen(word));
+	//printf("WORD == %s y len == %i\n", word, ft_strlen(word));
 	while (word[x] != '\0')
 	{
 		//printf("Valor x en bluce == %i\n", x);
 		decimal = (int)*(word + x);
 		temp = ft_binary(decimal);
+		ft_send(temp, pid);
 		//printf("valor de %c en decimal == %i\n", *(argv[2] + x), decimal );
 		//printf("temp = %s\n", temp);
 		x++;
 	}
-	ft_send(temp, pid);
-	printf("Fin\n");
+	//ft_send(temp, pid);
+	//printf("Fin\n");
 	return (0);
 
 }
