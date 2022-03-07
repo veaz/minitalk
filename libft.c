@@ -12,16 +12,6 @@
 
 #include "minitalk.h"
 
-int	ft_strlen(char *s)
-{
-	int	a;
-
-	a = 0;
-	while (s[a] != '\0')
-		a++;
-	return (a);
-}
-
 int	ft_atoi(char *str)
 {
 	int	x;

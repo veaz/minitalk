@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,23 +33,18 @@ int	ft_decimal(char *bin)
 	return (0);
 }
 
-void	ft_sigusr(int numsig)
+void	ft_sigserver(int numsig, int sig)
 {
 	if (numsig == SIGUSR1)
-	{
 		s_st.str[s_st.bit] = '1';
-		kill (s_st.signalpid, SIGUSR1);
-	}
 	else
-	{
 		s_st.str[s_st.bit] = '0';
-		kill (s_st.signalpid, SIGUSR1);
-	}
 	if (s_st.bit == 7)
 	{
 		s_st.str[s_st.bit + 1] = '\0';
 		ft_decimal(s_st.str);
 		s_st.bit = 0;
+		kill (sig, SIGUSR1);
 	}
 	else
 		s_st.bit++;
@@ -58,7 +53,7 @@ void	ft_sigusr(int numsig)
 void	get_pid(int sig, siginfo_t *info, void *context)
 {
 	s_st.signalpid = info->si_pid;
-	ft_sigusr(sig);
+	ft_sigserver(sig, s_st.signalpid);
 }
 
 int	main(void)
@@ -67,13 +62,12 @@ int	main(void)
 
 	process_id = getpid();
 	ft_printf("## B O N U S ##\nThe process id (PID): %d\n", process_id);
+	s_st.sa.sa_flags = SA_SIGINFO;
+	s_st.sa.sa_sigaction = get_pid;
+	sigaction(SIGUSR1, &s_st.sa, NULL);
+	sigaction(SIGUSR2, &s_st.sa, NULL);
+	pause();
 	while (1)
-	{
-		s_st.sa.sa_flags = SA_SIGINFO;
-		s_st.sa.sa_sigaction = get_pid;
-		sigaction(SIGUSR1, &s_st.sa, NULL);
-		sigaction(SIGUSR2, &s_st.sa, NULL);
-		pause ();
-	}
+		sleep(10);
 	return (0);
 }

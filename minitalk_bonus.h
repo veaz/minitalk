@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,10 @@
 
 #ifndef MINITALK_BONUS_H
 # define MINITALK_BONUS_H
-# include <stdio.h>
-# include <sys/types.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
-# include <stdlib.h> // Malloc
-# include <time.h> //nanosleep
-# include "ft_printf/ft_printf.h"  //TEST
+# include "ft_printf/ft_printf.h"
 
 struct s_st{
 	struct sigaction	sa;
@@ -28,12 +25,12 @@ struct s_st{
 	int					correctsend;
 } s_st;
 
-int		ft_strlen(char *s);  //Verificar librerias y eliminar
-
-int		ft_atoi(char *str);
-
+int		ft_decimal(char *bin);
+void	ft_sigclient(int numsig);
+void	ft_sigserver(int numsig, int sig);
+void	get_pid(int sig, siginfo_t *info, void *context);
 char	*ft_binary(int decimal);
-
 int		ft_send(char *bin, int pid);
+int		ft_atoi(char *str);
 
 #endif

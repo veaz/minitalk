@@ -22,12 +22,10 @@ struct s_st{
 	int		bit;
 } s_st;
 
-int		ft_strlen(char *s);
-
-int		ft_atoi(char *str);
-
+int		ft_decimal(char *bin);
+void	ft_sigusr(int numsig);
 char	*ft_binary(int decimal);
-
 int		ft_send(char *bin, int pid);
+int		ft_atoi(char *str);
 
 #endif

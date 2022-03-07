@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "minitalk_bonus.h"
 
-void	ft_sigusr(int numsig)
+void	ft_sigclient(int numsig)
 {
 	s_st.correctsend++;
 }
@@ -27,14 +27,12 @@ int	ft_send(char *bin, int pid)
 		if (bin[x] == '1')
 		{
 			kill (pid, SIGUSR1);
-			usleep (300);
 		}
 		else if (bin[x] == '0' )
 		{
 			kill (pid, SIGUSR2);
-			usleep (300);
 		}
-		signal(SIGUSR1, ft_sigusr);
+		usleep(200);
 		x++;
 	}
 	return (0);
@@ -81,8 +79,8 @@ int	main(int argc, char **argv)
 	temp = 0;
 	pid = ft_atoi(argv[1]);
 	word = argv[2];
-	signal(SIGUSR1, ft_sigusr);
-	signal(SIGUSR2, ft_sigusr);
+	signal(SIGUSR1, &ft_sigclient);
+	signal(SIGUSR2, &ft_sigclient);
 	while (word[x] != '\0')
 	{
 		decimal = (int)*(word + x);
