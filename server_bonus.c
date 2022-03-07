@@ -36,9 +36,15 @@ int	ft_decimal(char *bin)
 void	ft_sigusr(int numsig)
 {
 	if (numsig == SIGUSR1)
+	{
 		s_st.str[s_st.bit] = '1';
+		kill (s_st.signalpid, SIGUSR1);
+	}
 	else
+	{
 		s_st.str[s_st.bit] = '0';
+		kill (s_st.signalpid, SIGUSR1);
+	}
 	if (s_st.bit == 7)
 	{
 		s_st.str[s_st.bit + 1] = '\0';
@@ -49,16 +55,25 @@ void	ft_sigusr(int numsig)
 		s_st.bit++;
 }
 
+void	get_pid(int sig, siginfo_t *info, void *context)
+{
+	s_st.signalpid = info->si_pid;
+	ft_sigusr(sig);
+}
+
 int	main(void)
 {
 	pid_t	process_id;
 
 	process_id = getpid();
-	ft_printf("The process id (PID): %d\n", process_id);
-	signal(SIGUSR1, ft_sigusr);
-	signal(SIGUSR2, ft_sigusr);
+	ft_printf("## B O N U S ##\nThe process id (PID): %d\n", process_id);
 	while (1)
-		sigaction(SIGUSR1);
-		//pause ();
+	{
+		s_st.sa.sa_flags = SA_SIGINFO;
+		s_st.sa.sa_sigaction = get_pid;
+		sigaction(SIGUSR1, &s_st.sa, NULL);
+		sigaction(SIGUSR2, &s_st.sa, NULL);
+		pause ();
+	}
 	return (0);
 }

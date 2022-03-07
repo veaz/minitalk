@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
+
+void	ft_sigusr(int numsig)
+{
+	s_st.correctsend++;
+}
 
 int	ft_send(char *bin, int pid)
 {
@@ -29,6 +34,7 @@ int	ft_send(char *bin, int pid)
 			kill (pid, SIGUSR2);
 			usleep (300);
 		}
+		signal(SIGUSR1, ft_sigusr);
 		x++;
 	}
 	return (0);
@@ -75,12 +81,17 @@ int	main(int argc, char **argv)
 	temp = 0;
 	pid = ft_atoi(argv[1]);
 	word = argv[2];
+	signal(SIGUSR1, ft_sigusr);
+	signal(SIGUSR2, ft_sigusr);
 	while (word[x] != '\0')
 	{
 		decimal = (int)*(word + x);
+		if (decimal < 0)
+			decimal += 256;
 		temp = ft_binary(decimal);
 		ft_send(temp, pid);
 		x++;
 	}
+	ft_printf("Se han enviado %i senales\n", s_st.correctsend);
 	return (0);
 }

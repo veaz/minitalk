@@ -12,20 +12,17 @@
 
 #ifndef MINITALK_H
 # define MINITALK_H
-# include <stdio.h>
-# include <sys/types.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
-# include <stdlib.h> // Malloc
-# include <time.h> //nanosleep
-# include "ft_printf/ft_printf.h"  //TEST
+# include "ft_printf/ft_printf.h"
 
 struct s_st{
 	char	str[8];
 	int		bit;
 } s_st;
 
-int		ft_strlen(char *s);  //Verificar librerias y eliminar
+int		ft_strlen(char *s);
 
 int		ft_atoi(char *str);
 

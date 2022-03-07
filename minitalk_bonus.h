@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 # include <stdio.h>
 # include <sys/types.h>
 # include <unistd.h>
@@ -21,8 +21,11 @@
 # include "ft_printf/ft_printf.h"  //TEST
 
 struct s_st{
-	char	str[8];
-	int		bit;
+	struct sigaction	sa;
+	char				str[8];
+	int					bit;
+	int					signalpid;
+	int					correctsend;
 } s_st;
 
 int		ft_strlen(char *s);  //Verificar librerias y eliminar
