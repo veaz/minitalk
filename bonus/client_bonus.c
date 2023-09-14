@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vaguilar <vaguilar@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 12:16:52 by vaguilar          #+#    #+#             */
-/*   Updated: 2022/03/05 12:16:54 by vaguilar         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:57:01 by vaguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_sigclient(int numsig)
 {
+	(void)numsig;
 	s_st.correctsend++;
 }
 
@@ -74,6 +75,7 @@ int	main(int argc, char **argv)
 	int		decimal;
 	char	*temp;
 
+	(void)argc;
 	x = 0;
 	decimal = 0;
 	temp = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vaguilar <vaguilar@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 12:17:25 by vaguilar          #+#    #+#             */
-/*   Updated: 2022/03/05 12:17:27 by vaguilar         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:55:37 by vaguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_sigserver(int numsig, int sig)
 
 void	get_pid(int sig, siginfo_t *info, void *context)
 {
+	(void)context;
 	s_st.signalpid = info->si_pid;
 	ft_sigserver(sig, s_st.signalpid);
 }

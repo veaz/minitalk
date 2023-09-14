@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vaguilar <vaguilar@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vaguilar <vaguilar@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 12:17:15 by vaguilar          #+#    #+#             */
-/*   Updated: 2022/03/05 12:17:16 by vaguilar         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:55:25 by vaguilar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <signal.h>
-# include "ft_printf/ft_printf.h"
+# include "ft_printf.h"
 
 struct s_st{
 	struct sigaction	sa;
